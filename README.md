@@ -24,5 +24,6 @@ When running, open the api with http:<used_ip>:<used_port>/swagger/ to see test 
 - execute `ansible-playbook -b setup.yml -i inventory.cfg`
 - relax and watch it deploy
 
-## Docs:
+## Docs
+
 - Read the code. It has comments and is rather simple. Cheers.
