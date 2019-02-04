@@ -1,0 +1,18 @@
+---
+- name: Install dependencies
+  hosts: all
+  become: true
+  roles:
+    - { role: install_packages, tags: dependencies }
+
+- name: Copy app files
+  hosts: all
+  become: true
+  roles:
+    - { role: application, tags: deploy }
+
+- name: Setup systemd unit
+  hosts: all
+  become: true
+  roles:
+    - { role: systemd, tags: systemd }

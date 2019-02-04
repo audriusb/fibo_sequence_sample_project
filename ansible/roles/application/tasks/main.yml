@@ -1,0 +1,15 @@
+- name: Ensure app dir
+  file:
+    path: "{{ app_path }}"
+    state: directory
+
+- name: Copy application files
+  copy:
+    src: "{{ role_path }}/../../../fibonacci/"
+    dest: "{{ app_path }}/fibonacci/"
+  
+- name: Copy management file
+  copy:
+    src: "{{ role_path }}/../../../manage.py"
+    dest: "{{ app_path }}/manage.py"
+

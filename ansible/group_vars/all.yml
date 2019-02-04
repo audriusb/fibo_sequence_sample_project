@@ -1,0 +1,7 @@
+python_ver_debian : 3
+python_ver_rhel: 36
+pip_location: https://bootstrap.pypa.io/get-pip.py
+config_dir: /etc/fibo/
+app_path: /opt/fibo_service/
+app_port: 8000
+start_service: true

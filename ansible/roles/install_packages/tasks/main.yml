@@ -1,0 +1,33 @@
+- name: Install python (Ubuntu/Debian)
+  apt: name=python{{ python_ver_debian }} state=installed update_cache=yes
+  when: ansible_os_family == "Debian"
+
+- name: Install python (CentOS/RHEL)
+  yum: name=python{{ python_ver_rhel }} state=installed update_cache=yes
+  when: ansible_os_family == "RedHat"
+
+- name: Make python3 symlink (CentOS/RHEL)
+  command: "ln -sf /usr/bin/python{{ python_ver_rhel }} /usr/bin/python3"
+  when: ansible_os_family == "RedHat"
+
+  
+- name: Download pip install script
+  command: "curl {{ pip_location }} -o /tmp/get-pip.py"
+
+- name: Install pip (setup tools)
+  command: "python3 /tmp/get-pip.py"
+
+- name: Ensure config dir
+  file:
+    path: "{{ config_dir }}"
+    state: directory
+
+- name: Copy requirements.txt
+  copy:
+    src: "{{ role_path }}/../../../requirements.txt"
+    dest: "{{ config_dir }}/requirements.txt"
+    mode: 0644
+
+- name: Install  app requirements
+  command: "/usr/local/bin/pip3 install -r {{ config_dir }}/requirements.txt"
+ 

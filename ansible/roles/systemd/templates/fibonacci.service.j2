@@ -1,0 +1,17 @@
+[Unit]
+Description=Fibo Service
+After=network.target
+
+[Service]
+Type=Simple
+WorkingDirectory={{ app_path }}
+ExecStartPre=-/usr/bin/python3 manage.py migrate
+ExecStart=/usr/bin/python3 manage.py runserver 0.0.0.0:{{ app_port }}
+Restart=always
+RestartSec=10s
+ExecStop=/bin/kill -- $MAINPID
+TimeoutStopSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
